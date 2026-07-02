@@ -48,7 +48,8 @@ Profile
 
 ---
 
-## Daily Logging
+## Daily Logging details
+
 
 Tap +
 
@@ -75,3 +76,7 @@ Notes
 ↓
 
 Save
+
+
+
+e
