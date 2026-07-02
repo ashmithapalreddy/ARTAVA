@@ -36,7 +36,7 @@ To empower women with accurate, private, and data-driven menstrual health tracki
 - Prisma ORM
 
 ### AI
-- OpenAI API (or another LLM)
+- OpenAI API
 - Predictive analytics
 
 ## Status
