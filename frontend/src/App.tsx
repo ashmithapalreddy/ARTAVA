@@ -1,10 +1,5 @@
-function App() {
-  return (
-    <div>
-      <h1>🌸 Welcome to ARTAVA</h1>
-      <p>Know Your Cycle. Understand Your Body.</p>
-    </div>
-  );
-}
+import AppRouter from "./routes/AppRouter";
 
-export default App;
+export default function App() {
+  return <AppRouter />;
+}
