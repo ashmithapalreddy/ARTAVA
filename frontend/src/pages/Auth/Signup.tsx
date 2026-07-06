@@ -1,77 +1,81 @@
-import { Link } from "react-router-dom";
-import { User, Mail, Lock } from "lucide-react";
-import logo from "../../assets/logo/artava-logo.png";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { signup } from "../../services/auth";
 
 export default function Signup() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      await signup(email, password);
+
+      alert("Account created successfully!");
+
+      navigate("/home");
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F7EEF7] via-[#E9D5E9] to-[#C8A2C8] flex items-center justify-center px-6">
+    <div className="min-h-screen flex items-center justify-center bg-[#FFF9FC] px-6">
 
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8">
+      <form
+        onSubmit={handleSignup}
+        className="bg-white p-8 rounded-3xl shadow-lg w-full max-w-md"
+      >
 
-        <div className="flex justify-center">
-          <img
-            src={logo}
-            alt="ARTAVA"
-            className="w-32"
-          />
-        </div>
-
-        <h1 className="text-3xl font-bold text-center mt-5 text-[#7A4E7A]">
+        <h1 className="text-3xl font-bold text-center text-[#A67FA6] mb-8">
           Create Account
         </h1>
 
-        <p className="text-center text-gray-500 mt-2">
-          Start your wellness journey with ARTAVA
-        </p>
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full border rounded-xl p-3 mb-4"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-        <div className="mt-8 space-y-5">
+        <input
+          type="password"
+          placeholder="Password"
+          className="w-full border rounded-xl p-3 mb-6"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-          <div className="flex items-center border rounded-xl px-4 py-3">
-            <User size={20} className="text-gray-400" />
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="ml-3 w-full outline-none"
-            />
-          </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-[#A67FA6] text-white py-3 rounded-xl hover:bg-[#916291]"
+        >
+          {loading ? "Creating..." : "Sign Up"}
+        </button>
 
-          <div className="flex items-center border rounded-xl px-4 py-3">
-            <Mail size={20} className="text-gray-400" />
-            <input
-              type="email"
-              placeholder="Email"
-              className="ml-3 w-full outline-none"
-            />
-          </div>
-
-          <div className="flex items-center border rounded-xl px-4 py-3">
-            <Lock size={20} className="text-gray-400" />
-            <input
-              type="password"
-              placeholder="Password"
-              className="ml-3 w-full outline-none"
-            />
-          </div>
-
-          <button
-            className="w-full bg-[#A67FA6] hover:bg-[#916291] transition text-white py-3 rounded-xl font-semibold"
-          >
-            Create Account
-          </button>
-
-        </div>
-
-        <p className="text-center mt-8 text-gray-600">
+        <p className="text-center mt-6">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-[#8A5CA6] font-semibold"
+            className="text-[#A67FA6] font-semibold"
           >
-            Sign In
+            Login
           </Link>
         </p>
 
-      </div>
+      </form>
 
     </div>
   );

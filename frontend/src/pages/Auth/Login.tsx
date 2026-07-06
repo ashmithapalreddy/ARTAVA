@@ -1,112 +1,96 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Mail, Lock, Eye } from "lucide-react";
-import logo from "../../assets/logo/artava-logo.png";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { login, loginWithGoogle } from "../../services/auth";
 
 export default function Login() {
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      await login(email, password);
+
+      navigate("/home");
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      navigate("/home");
+    } catch (error: any) {
+      alert(error.message);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F7EEF7] via-[#E9D5E9] to-[#C8A2C8] flex items-center justify-center px-6">
+    <div className="min-h-screen flex items-center justify-center bg-[#FFF9FC] px-6">
 
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8">
+      <form
+        onSubmit={handleLogin}
+        className="bg-white p-8 rounded-3xl shadow-lg w-full max-w-md"
+      >
 
-        {/* Logo */}
-        <div className="flex justify-center">
-          <img
-            src={logo}
-            alt="ARTAVA"
-            className="w-32"
-          />
-        </div>
-
-        {/* Heading */}
-        <h1 className="text-3xl font-bold text-center mt-5 text-[#7A4E7A]">
+        <h1 className="text-3xl font-bold text-center text-[#A67FA6] mb-8">
           Welcome Back
         </h1>
 
-        <p className="text-center text-gray-500 mt-2">
-          Continue your wellness journey
-        </p>
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full border rounded-xl p-3 mb-4"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-        {/* Form */}
-        <div className="mt-8 space-y-5">
+        <input
+          type="password"
+          placeholder="Password"
+          className="w-full border rounded-xl p-3 mb-6"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-          {/* Email */}
-          <div className="flex items-center border rounded-xl px-4 py-3">
-            <Mail size={20} className="text-gray-400" />
-            <input
-              type="email"
-              placeholder="Email"
-              className="ml-3 w-full outline-none"
-            />
-          </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-[#A67FA6] text-white py-3 rounded-xl hover:bg-[#916291]"
+        >
+          {loading ? "Signing In..." : "Login"}
+        </button>
 
-          {/* Password */}
-          <div className="flex items-center border rounded-xl px-4 py-3">
-            <Lock size={20} className="text-gray-400" />
-            <input
-              type="password"
-              placeholder="Password"
-              className="ml-3 w-full outline-none"
-            />
-            <Eye
-              size={20}
-              className="text-gray-400 cursor-pointer"
-            />
-          </div>
-
-          {/* Forgot Password */}
-          <div className="text-right">
-            <button
-              type="button"
-              className="text-sm text-[#8A5CA6] hover:underline"
-            >
-              Forgot Password?
-            </button>
-          </div>
-
-          {/* Sign In */}
-          <button
-            type="button"
-            onClick={() => navigate("/home")}
-            className="w-full bg-[#A67FA6] hover:bg-[#916291] transition text-white py-3 rounded-xl font-semibold"
-          >
-            Sign In
-          </button>
-
-        </div>
-
-        {/* Divider */}
-        <div className="flex items-center my-8">
-          <div className="flex-1 border-t"></div>
-
-          <span className="mx-3 text-gray-400">
-            OR
-          </span>
-
-          <div className="flex-1 border-t"></div>
-        </div>
-
-        {/* Google Button */}
         <button
           type="button"
-          className="w-full border rounded-xl py-3 font-medium hover:bg-gray-50 transition"
+          onClick={handleGoogleLogin}
+          className="w-full mt-4 border border-gray-300 py-3 rounded-xl hover:bg-gray-100"
         >
           Continue with Google
         </button>
 
-        {/* Signup */}
-        <p className="text-center mt-8 text-gray-600">
+        <p className="text-center mt-6">
           Don't have an account?{" "}
           <Link
             to="/signup"
-            className="text-[#8A5CA6] font-semibold hover:underline"
+            className="text-[#A67FA6] font-semibold"
           >
             Sign Up
           </Link>
         </p>
 
-      </div>
+      </form>
 
     </div>
   );
