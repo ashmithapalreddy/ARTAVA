@@ -1,4 +1,10 @@
-export default function CalendarCard() {
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { useState } from "react";
+
+export default function CycleCalendar() {
+  const [date, setDate] = useState(new Date());
+
   return (
     <div className="mt-6 bg-white rounded-3xl shadow-md p-6">
 
@@ -6,11 +12,12 @@ export default function CalendarCard() {
         Calendar
       </h3>
 
-      <div className="mt-4 h-60 rounded-2xl bg-[#F8F0F8] flex items-center justify-center">
+      <div className="mt-4 rounded-2xl overflow-hidden">
 
-        <span className="text-[#A67FA6] text-lg">
-          📅 Calendar Component
-        </span>
+        <Calendar
+          value={date}
+          onChange={(value) => setDate(value as Date)}
+        />
 
       </div>
 

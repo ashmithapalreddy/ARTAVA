@@ -19,7 +19,7 @@ export default function Signup() {
 
       alert("Account created successfully!");
 
-      navigate("/home");
+      navigate("/onboarding");
     } catch (error: any) {
       alert(error.message);
     } finally {

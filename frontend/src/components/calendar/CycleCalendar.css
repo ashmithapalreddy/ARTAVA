@@ -1,0 +1,167 @@
+/* ==========================
+   ARTAVA Cycle Calendar
+   ========================== */
+
+/* Main Calendar */
+
+.react-calendar {
+  width: 100%;
+  border: none;
+  background: white;
+  border-radius: 20px;
+  font-family: inherit;
+}
+
+/* ==========================
+   Month Navigation
+   ========================== */
+
+.react-calendar__navigation {
+  margin-bottom: 24px;
+  padding-top: 8px;
+}
+
+.react-calendar__navigation button {
+  background: transparent;
+  border: none;
+  color: #7d6485;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.25s ease;
+}
+
+.react-calendar__navigation button:hover {
+  background: transparent;
+  color: #5b4a5b;
+}
+
+.react-calendar__navigation button:disabled {
+  background: transparent;
+  color: #c9b6cf;
+}
+
+/* ==========================
+   Weekday Names
+   ========================== */
+
+.react-calendar__month-view__weekdays {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  color: #b193bb;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 10px 0;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}
+
+/* ==========================
+   Calendar Tiles
+   ========================== */
+
+.react-calendar__tile {
+  height: 46px;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+  color: #5b4a5b;
+  font-weight: 500;
+}
+
+.react-calendar__tile:hover {
+  background: #f6eef8;
+  border-radius: 50%;
+}
+
+/* ==========================
+   Selected Date
+   ========================== */
+
+.react-calendar__tile--active {
+  background: #c8a2c8 !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+/* ==========================
+   Today's Date
+   ========================== */
+
+.react-calendar__tile--now {
+  background: #f3e8f8 !important;
+  color: #5b4a5b !important;
+  border: 2px solid #c8a2c8;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.react-calendar__tile--now:hover {
+  background: #ead7f3 !important;
+}
+
+.react-calendar__tile--now.react-calendar__tile--active {
+  background: #c8a2c8 !important;
+  color: white !important;
+}
+
+/* ==========================
+   Weekend
+   ========================== */
+
+.react-calendar__month-view__days__day--weekend {
+  color: #b05d79;
+}
+
+/* ==========================
+   Neighboring Month Dates
+   ========================== */
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #d5c7d8;
+}
+
+/* ==========================
+   Period Days
+   ========================== */
+
+.period-day {
+  background: #ffd6e7 !important;
+  color: #9d174d !important;
+  border-radius: 50%;
+  font-weight: 600;
+}
+
+/* ==========================
+   Fertile Window
+   ========================== */
+
+.fertile-day {
+  background: #d9f5dd !important;
+  color: #2d6a4f !important;
+  border-radius: 50%;
+  font-weight: 600;
+}
+
+/* ==========================
+   Ovulation Day
+   ========================== */
+
+.ovulation-day {
+  background: #eadcff !important;
+  color: #6d28d9 !important;
+  border-radius: 50%;
+  font-weight: 600;
+}
+
+/* ==========================
+   Remove Focus Outline
+   ========================== */
+
+.react-calendar button:focus {
+  outline: none;
+  box-shadow: none;
+}
